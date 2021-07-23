@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Unofficial Punishing Gray Raven Simple Calculator and Stuff</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+  .fakeimg {
+    height: 200px;
+    background: #aaa;
+  }
+</style>
+</head>
+<body>
+
+  <div class="jumbotron text-center" style="margin-bottom:0">
+    <h1>Punishing Gray Raven Manager made by Kougu</h1>
+    <p>contact me => ravenkougu@gmail.com</p> 
+  </div>
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="#">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+  <div class="container" style="margin-top:30px">
+    <div class="row">
+      <div class="col-sm-4">
+        <h2 style="text-align:center;">Future Plan</h2>
+        <ul class="list-group">
+          <li class="list-group-item">Serum Calculator</li>
+          <li class="list-group-item">The "Skin" Slot Machine Calculator</li>
+          <li class="list-group-item">Character Collection</li>
+          <li class="list-group-item">Guides</li>
+        </ul>
+      </div>
+      <div class="col-sm-8">
+        <div class="row">
+          <div class="col-sm-12">
+            <h2 style="text-align:center;">Serum Calculator</h2>
+            <small>In PGR Global 1 serum will recover every 6 mins. <br>Enter your current serum and your max serum value below.<br> the site will do the calculation for you.</small>
+            <p style="text-align:center;">Time: <span id="time_now"></span></p>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Current Serum:</label>
+              <input type="text" class="form-control" id="currSerum">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label>Max Serum:</label>
+              <input type="text" class="form-control" id="maxSerum">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="text-center">
+              <button type="button" class="btn btn-info" onclick="getFullTime();">When will my serum full?</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="text-center">
+            <p style="text-align:center;">Time: <span id="time_full"></span></p>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="jumbotron text-center mt-5" style="margin-bottom:0">
+    <p>Let's save up for Alpha! :)</p>
+  </div>
+  <script type="text/javascript">
+    function getCurrentTime() {
+      var curdate=new Date()
+      var h=curdate.getHours(); 
+      var m=curdate.getMinutes();
+      var s=curdate.getSeconds();
+      var curtime = [h,m,s];
+      return curtime;
+    }
+    function getFullTime(){
+      var cur_serum=$("#currSerum").val();
+      var max_serum=$("#maxSerum").val();
+      var diff= parseInt(max_serum)-parseInt(cur_serum);
+      var total_s= diff * 6*60*1000;
+      var time_later=new Date();
+      time_later=new Date(time_later.getTime() + total_s);
+      var h=time_later.getHours(); 
+      var m=time_later.getMinutes();
+      var s=time_later.getSeconds();
+      var time_later_show= String(h)+":"+String(m)+":"+String(s);
+      $('#time_full').html(time_later_show);
+    }
+    $(document).ready(function() {
+      var interval = setInterval(function() {
+        var time_now=getCurrentTime();
+        var time_now= String(time_now[0])+":"+String(time_now[1])+":"+String(time_now[2]);
+
+        $('#time_now').html(time_now);
+      }, 50);
+    });
+  </script>
+</body>
+</html>
